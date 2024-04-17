@@ -1,10 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Navbar from "../Shared/Navbar/Navbar";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
-
+import toast from "react-hot-toast";
 const Login = () => {
   const { signIn } = useContext(AuthContext);
+  const location = useLocation();
+  console.log("location in the login ", location);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -17,6 +19,7 @@ const Login = () => {
     signIn(email, password)
       .then((result) => {
         console.log(result.user);
+        toast.success("login success");
       })
       .catch((error) => {
         console.error(error);
